@@ -18,6 +18,6 @@
 | user1  | user1      | √              | ×              | √              |
 | 站长   | user1      | ×              | √              | ×              |
 | user1  | 站长       | ×              | √              | √              |
-| user1  | user2      | √              | √              |                |
+| user1  | user2      | √              | √              | √               |
 
 博客地址：https://www.zhaoyingtian.com/archives/mailer.html
