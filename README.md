@@ -22,4 +22,23 @@
 | user1  | 站长       | ×              | √              | √              |
 | user1  | user2      | √              | √              | √               |
 
+# 模板
+
+| 变量         | 含义         |
+| ------------ | ------------ |
+| {time}       | 评论发出时间 |
+| {author}     | 昵称         |
+| {mail}       | 邮箱         |
+| {url}        | 网址         |
+| {ip}         | IP           |
+| {agent}      | UA           |
+| {text}       | 内容         |
+| {parentName} | 父级评论昵称 |
+| {parentText} | 父级评论内容 |
+| {parentMail} | 父级评论邮箱 |
+| {title}      | 文章标题     |
+| {permalink}  | 评论链接     |
+| {siteTitle}  | 网站标题     |
+| {siteUrl}    | 网站地址     |
+
 博客地址：https://www.zhaoyingtian.com/archives/mailer.html
