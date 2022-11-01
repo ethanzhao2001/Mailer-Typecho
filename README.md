@@ -49,7 +49,9 @@
 # 更新
 
 1.1.0
+
 增加 测试日志记录模式
+
 增加 手动关闭异步以解决某些奇怪情况无法发信的问题
 
 博客地址：https://www.zhaoyingtian.com/archives/mailer.html
