@@ -229,16 +229,16 @@ class Plugin implements PluginInterface
             $comment->parentName = $parent->author;
             $comment->parentText = $parent->text;
         }
-        //评论者或者父评论者是站长
-        if ($userMail == $adminMail || $comment->parentMail == $adminMail) {
-        } else {
-            self::sendNotice($comment);
-        }
         //评论者与父评论者不同，且父评论不为空
         if ($userMail != $comment->parentMail && $comment->parentMail != NULL) {
             if ($comment->status == 'approved' || $comment->parentMail == $adminMail) {
                 self::sendReply($comment);
             }
+        }
+        //评论者或者父评论者是站长
+        if ($userMail == $adminMail || $comment->parentMail == $adminMail) {
+        } else {
+            self::sendNotice($comment);
         }
     }
     //审核通过事件发信
