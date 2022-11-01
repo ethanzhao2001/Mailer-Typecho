@@ -41,4 +41,15 @@
 | {siteTitle}  | 网站标题     |
 | {siteUrl}    | 网站地址     |
 
+
+# 说明
+
+目前异步发信可能无法成功执行，暂未找到原因
+
+# 更新
+
+1.1.0
+增加 测试日志记录模式
+增加 手动关闭异步以解决某些奇怪情况无法发信的问题
+
 博客地址：https://www.zhaoyingtian.com/archives/mailer.html
