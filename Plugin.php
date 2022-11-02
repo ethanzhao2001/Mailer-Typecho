@@ -40,7 +40,7 @@ class Plugin implements PluginInterface
         \Typecho\Plugin::factory('Widget_Feedback')->finishComment = __CLASS__ . '::Comment';
         \Typecho\Plugin::factory('Widget_Comments_Edit')->finishComment = __CLASS__ . '::Comment';
         \Typecho\Plugin::factory('Widget_Comments_Edit')->mark = __CLASS__ . '::Approved';
-        //异步触发
+        //异步
         \Typecho\Plugin::factory('Widget_Service')->SendMailComment = __CLASS__ . '::SendMailComment';
         \Typecho\Plugin::factory('Widget_Service')->SendMailApproved = __CLASS__ . '::SendMailApproved';
         \Typecho\Plugin::factory('Widget_Service')->CheckMail = __CLASS__ . '::CheckMail';
@@ -82,7 +82,7 @@ class Plugin implements PluginInterface
         $log = new Radio('log', array('1' => _t('普通模式'), '2' => _t('测试模式')), '1', _t('日志记录'));
         $form->addInput($log);
         //异步发送
-        $async = new Radio('async', array('1' => _t('开启'), '0' => _t('关闭')), '0', _t('异步发送'));
+        $async = new Radio('async', array('1' => _t('开启'), '0' => _t('关闭')), '1', _t('异步发送'));
         $form->addInput($async);
     }
     /**
