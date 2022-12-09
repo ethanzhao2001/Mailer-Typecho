@@ -25,7 +25,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
  *
  *@package Mailer
  *@author 呆小萌
- *@version 1.1.0
+ *@version 1.1.1
  *@link https://www.zhaoyingtian.com/archives/mailer.html
  */
 
@@ -229,7 +229,7 @@ class Plugin implements PluginInterface
             $comment->parentName = $parent->author;
             $comment->parentText = $parent->text;
         }
-        //评论者与父评论者不同，且父评论不为空
+        //评论者与父评论者不同，且父评论不为空（关闭审核发送回复）
         if ($userMail != $comment->parentMail && $comment->parentMail != NULL) {
             if ($comment->status == 'approved' || $comment->parentMail == $adminMail) {
                 self::sendReply($comment);
@@ -267,9 +267,11 @@ class Plugin implements PluginInterface
         if ($userMail != $adminMail && $userMail != NULL) {
             self::sendApproved($comment);
         }
-        //评论者与父评论者不同，且父评论不为空
+        //评论者与父评论者不同，且父评论不为空(开启审核发送回复)
         if ($userMail != $comment->parentMail && $comment->parentMail != NULL) {
-            self::sendReply($comment);
+            if ($comment->parentMail != $adminMail) {
+                self::sendReply($comment);
+            }
         }
     }
     public static function sendReply($comment)

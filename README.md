@@ -54,4 +54,8 @@
 
 增加 手动关闭异步以解决某些情况无法发信的问题
 
+1.1.1
+
+修复 站长重复收到信息的BUG
+
 博客地址：https://www.zhaoyingtian.com/archives/mailer.html
