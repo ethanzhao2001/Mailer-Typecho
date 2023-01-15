@@ -62,7 +62,7 @@ class Plugin implements PluginInterface
         //获取站长邮箱
         $user = Widget::widget('Widget_User');
         $mail = $user->mail;
-        $adminMail = new Text('adminMail', NULL, $mail, _t('站长邮箱'));
+        $adminMail = new Text('adminMail', NULL, $mail, _t('站长邮箱'), _t('需要与系统邮箱一致，否则会重复发信，请勿轻易改动'));
         $form->addInput($adminMail);
         //SMTP服务器地址
         $smtpHost = new Text('smtpHost', NULL, 'smtp.qq.com', _t('SMTP服务器地址'));
@@ -80,17 +80,17 @@ class Plugin implements PluginInterface
         $smtpPass = new Text('smtpPass', NULL, NULL, _t('SMTP邮箱密码'));
         $form->addInput($smtpPass);
         //异步发送
-        $async = new Radio('async', array('1' => _t('开启'), '0' => _t('关闭')), '1', _t('异步发送'));
+        $async = new Radio('async', array('1' => _t('开启'), '0' => _t('关闭')), '1', _t('异步发送'), _t('如果开启异步无法正常发送邮件，可尝试关闭异步发送'));
         $form->addInput($async);
         //日志记录
-        $log = new Radio('log', array('1' => _t('普通'), '2' => _t('详细')), '1', _t('日志记录'));
+        $log = new Radio('log', array('1' => _t('普通'), '2' => _t('详细')), '1', _t('日志记录'), _t('普通模式仅记录发信错误日志，详细模式记录所有日志'));
         $form->addInput($log);
         //头像接口
         $avatar = new Text('avatar', NULL, 'https://sdn.geekzu.org/avatar/', _t('Gravatar头像接口'));
         $form->addInput($avatar);
         //模板选择
         $template = new Select(
-            'avatar',
+            'template',
             array('default' => _t('默认'), 'color' => _t('多彩'), 'chat' => _t('聊天'), 'custom' => _t('自定义')),
             'default',
             _t('模板选择'),
@@ -216,7 +216,7 @@ class Plugin implements PluginInterface
         $commentOjb->parent = $comment->parent;
         $commentOjb->title = $comment->title;
         $commentOjb->permalink = $comment->permalink;
-        $commentOjb->created = date('Y-m-d H:i:s', $comment->created);
+        $commentOjb->time = date('Y-m-d H:i:s', $comment->created);
         $commentJson = json_encode($commentOjb);
         return $commentJson;
     }
@@ -241,6 +241,7 @@ class Plugin implements PluginInterface
             $comment->parentMail = $parent->mail; //父评论者
             $comment->parentName = $parent->author;
             $comment->parentText = $parent->text;
+            $comment->parentTime = date('Y-m-d H:i:s', $parent->created);
         }
         //评论者与父评论者不同，且父评论不为空（关闭审核发送回复）
         if ($userMail != $comment->parentMail && $comment->parentMail != NULL) {
@@ -275,6 +276,7 @@ class Plugin implements PluginInterface
             $comment->parentMail = $parent->mail; //父评论者
             $comment->parentName = $parent->author;
             $comment->parentText = $parent->text;
+            $comment->parentTime = date('Y-m-d H:i:s', $parent->created);
         }
         //评论者不是站长
         if ($userMail != $adminMail && $userMail != NULL) {
@@ -342,16 +344,21 @@ class Plugin implements PluginInterface
             $test = $time . " Mail\n";
             file_put_contents($fileName, $test, FILE_APPEND);
         }
-        $ThemeFile = file_get_contents(dirname(__FILE__) . '/Theme/' . $theme . '.html');
+        //获取模板
+        $template = $Mailer->template;
+        $ThemeFile = file_get_contents(dirname(__FILE__) . '/Theme/' . $template . '/' . $theme . '.html');
         $search = array(
             '{time}', //评论发出时间
             '{author}', //昵称
+            '{avatar}', //头像
+            '{text}', //内容
             '{mail}', //邮箱
             '{url}', //网址
             '{ip}', //IP
             '{agent}', //UA
-            '{text}', //内容
+            '{parentTime}', //父级评论昵称
             '{parentName}', //父级评论昵称
+            '{parentAvatar}', //父级评论头像
             '{parentText}', //父级评论内容
             '{parentMail}', //父级评论邮箱
             '{title}', //文章标题
@@ -360,14 +367,17 @@ class Plugin implements PluginInterface
             '{siteUrl}', //网站地址
         );
         $replace = array(
-            $comment->created,
+            $comment->time,
             $comment->author,
+            self::MailToAvatar($comment->mail),
+            $comment->text,
             $comment->mail,
             $comment->url,
             $comment->ip,
             $comment->agent,
-            $comment->text,
+            $comment->parentTime,
             $comment->parentName,
+            self::MailToAvatar($comment->parentMail),
             $comment->parentText,
             $comment->parentMail,
             $comment->title,
@@ -426,5 +436,11 @@ class Plugin implements PluginInterface
                 '内容：' . $mail->Body . "\n" . "\n";
             file_put_contents($fileName, $error, FILE_APPEND);
         }
+    }
+    /**
+     *头像生成
+     */
+    public static function MailToAvatar($mail)
+    {
     }
 }
