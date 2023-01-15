@@ -446,7 +446,7 @@ class Plugin implements PluginInterface
         if (strpos($mail, '@qq.com')) {
             $qq = explode('@', $mail);
             $qq = $qq[0];
-            $avatar = 'https://q1.qlogo.cn/g?b=qq&nk=' . $qq . '&s=40';
+            $avatar = 'https://q1.qlogo.cn/g?b=qq&nk=' . $qq . '&s=100';
         } else {
             //读取镜像地址
             $options = Options::alloc();
@@ -456,7 +456,7 @@ class Plugin implements PluginInterface
             if (substr($avatarurl, -1) != '/') {
                 $avatarurl = $avatarurl . '/';
             }
-            $avatar = $avatarurl . md5($mail) . '?s=40&d=identicon';
+            $avatar = $avatarurl . md5($mail) . '?s=100&d=identicon';
         }
         return $avatar;
     }
