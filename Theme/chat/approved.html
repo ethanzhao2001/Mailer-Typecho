@@ -19,37 +19,23 @@
     <div
         style="width: 100%;max-width: 550px;margin:1rem auto;background-color: #f4f5f8;padding: 1rem;box-sizing: border-box;">
         <div style="font-size: 16px;line-height: 1.5;font-weight: bold;">
-            <p>书呈{addressee}台鉴：</p>
-            <p>见字如晤。</p>
+            <div style="text-align: center;">你在<a href="{permalink}" target="_blank" rel="noopener"
+                style="text-decoration: none;color:#373737;">《{title}》</a>的评论已通过审核</div>
         </div><!--!!!-->
-        <div style="display: flex;flex-direction:column;margin-bottom: 3rem;">
-            <div style="text-align: right;line-height: 2rem;font-size: 13px;font-weight: bold;">您说：</div>
+        <div style="text-align: center;font-size: 12px;color: #c8c8c8;padding: 1rem 0;">{time}</div>
+        <div style="display: flex;flex-direction:column;">
+            <div style="text-align: right;line-height: 2rem;font-size: 13px;font-weight: bold;">{author}</div>
             <div style="display: flex;justify-content: flex-end;margin-bottom: 5px">
-                <div style="width: auto;flex: none;order: 2"><img src="{addressee_avatar}"
+                <div style="width: auto;flex: none;order: 2"><img src="{avatar}"
                         style="width: 35px;height: 35px;border-radius: 50%;"></div>
                 <div style="position: relative;margin-right: 20px"><span
                         style="width: 0;height: 0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:8px solid;border-left-color:#373737;border-right:0;border-right-color:transparent;right: -8px;left: auto;top: 12px;position: absolute"></span>
                     <div
                         style="background-color: #373737;padding: 10px;border-radius: 9px;margin-bottom: 3px;font-size: 13px;color: #ffffff;word-break: break-all;">
-                        {addressee_content}</div>
+                        {text}</div>
                 </div>
             </div>
-            <div style="text-align: center;font-size: 12px;color: #c8c8c8;padding: 1rem 0;">{start_date}</div>
-        </div><!--!!!--><!--!!!-->
-        <div style="display: flex;flex-direction:column;">
-            <div style="line-height: 2rem;font-size: 13px;font-weight: bold;">{addresser_name}对您说：</div>
-            <div style="display: flex;margin-bottom: 5px">
-                <div style="width: auto;flex: none"><img src="{addresser_avatar}"
-                        style="width: 35px;height: 35px;border-radius: 50%;"></div>
-                <div style="position: relative;margin-left: 20px;"><span
-                        style="width: 0;height: 0;border-top: 8px solid transparent;border-bottom: 8px solid transparent;border-right: 8px solid;border-right-color: #373737;left: -8px;right: auto;top: 12px;position: absolute"></span>
-                    <div
-                        style="background-color: #373737;padding: 10px;border-radius: 9px;margin-bottom: 3px;font-size: 13px;color: #ffffff;word-break: break-all;">
-                        {addresser_content}</div>
-                </div>
-            </div>
-            <div style="text-align: center;font-size: 12px;color: #c8c8c8;padding: 1rem 0;">{end_date}</div>
-        </div><!--!!!-->
+        </div>
         <div style="text-align: center;padding: 3rem 0;font-size: 12px;"></div>
         <div style="text-align: center;color: #ccc;font-size: 12px;">by blog.keepke.com</div>
     </div>
