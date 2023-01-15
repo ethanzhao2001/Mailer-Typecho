@@ -24,22 +24,25 @@
 
 # 模板
 
-| 变量         | 含义         |
-| ------------ | ------------ |
-| {time}       | 评论发出时间 |
-| {author}     | 昵称         |
-| {mail}       | 邮箱         |
-| {url}        | 网址         |
-| {ip}         | IP           |
-| {agent}      | UA           |
-| {text}       | 内容         |
-| {parentName} | 父级评论昵称 |
-| {parentText} | 父级评论内容 |
-| {parentMail} | 父级评论邮箱 |
-| {title}      | 文章标题     |
-| {permalink}  | 评论链接     |
-| {siteTitle}  | 网站标题     |
-| {siteUrl}    | 网站地址     |
+| 变量           | 含义         |
+| -------------- | ------------ |
+| {time}         | 评论时间     |
+| {author}       | 昵称         |
+| {avatar}       | 头像。         |
+| {text}         | 内容         |
+| {mail}         | 邮箱         |
+| {url}          | 网址         |
+| {ip}           | IP           |
+| {agent}        | UA           |
+| {parentTime}   | 父级评论时间。 |
+| {parentName}   | 父级评论昵称 |
+| {parentAvatar} | 父级评论头像。 |
+| {parentText}   | 父级评论内容 |
+| {parentMail}   | 父级评论邮箱 |
+| {title}        | 文章标题     |
+| {permalink}    | 评论链接     |
+| {siteTitle}    | 网站标题     |
+| {siteUrl}      | 网站地址     |
 
 
 # 说明
@@ -64,8 +67,10 @@
 
 修复 站长重复收到信息的BUG
 
-1.2
+2.0
 
-增加 模板切换
+增加 评论者头像的变量
+
+增加 多模板切换
 
 博客地址：https://www.zhaoyingtian.com/archives/mailer.html

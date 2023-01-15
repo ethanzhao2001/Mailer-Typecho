@@ -6,6 +6,7 @@ use Typecho\Plugin\PluginInterface;
 use Typecho\Widget\Helper\Form;
 use Typecho\Widget\Helper\Form\Element\Text;
 use Typecho\Widget\Helper\Form\Element\Radio;
+use Typecho\Widget\Helper\Form\Element\Select;
 use Typecho\Widget;
 use Widget\Options;
 use Utils\Helper;
@@ -78,12 +79,24 @@ class Plugin implements PluginInterface
         //SMTP邮箱密码
         $smtpPass = new Text('smtpPass', NULL, NULL, _t('SMTP邮箱密码'));
         $form->addInput($smtpPass);
-        //日志记录
-        $log = new Radio('log', array('1' => _t('普通模式'), '2' => _t('测试模式')), '1', _t('日志记录'));
-        $form->addInput($log);
         //异步发送
         $async = new Radio('async', array('1' => _t('开启'), '0' => _t('关闭')), '1', _t('异步发送'));
         $form->addInput($async);
+        //日志记录
+        $log = new Radio('log', array('1' => _t('普通'), '2' => _t('详细')), '1', _t('日志记录'));
+        $form->addInput($log);
+        //头像接口
+        $avatar = new Text('avatar', NULL, 'https://sdn.geekzu.org/avatar/', _t('Gravatar头像接口'));
+        $form->addInput($avatar);
+        //模板选择
+        $template = new Select(
+            'avatar',
+            array('default' => _t('默认'), 'color' => _t('多彩'), 'chat' => _t('聊天'), 'custom' => _t('自定义')),
+            'default',
+            _t('模板选择'),
+            _t('自定义模板请在 Mailer/Theme/custom 添加模板文件')
+        );
+        $form->addInput($template->multiMode());
     }
     /**
      *个人用户的配置面板
