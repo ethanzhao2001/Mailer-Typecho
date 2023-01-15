@@ -86,7 +86,7 @@ class Plugin implements PluginInterface
         $log = new Radio('log', array('1' => _t('普通'), '2' => _t('详细')), '1', _t('日志记录'), _t('普通模式仅记录发信错误日志，详细模式记录所有日志'));
         $form->addInput($log);
         //头像接口
-        $avatar = new Text('avatar', NULL, 'https://sdn.geekzu.org/avatar/', _t('Gravatar头像接口'));
+        $avatar = new Text('avatar', NULL, 'https://sdn.geekzu.org/avatar/', _t('Gravatar镜像地址'));
         $form->addInput($avatar);
         //模板选择
         $template = new Select(
@@ -442,5 +442,22 @@ class Plugin implements PluginInterface
      */
     public static function MailToAvatar($mail)
     {
+        //判断邮箱
+        if (strpos($mail, '@qq.com')) {
+            $qq = explode('@', $mail);
+            $qq = $qq[0];
+            $avatar = 'https://q1.qlogo.cn/g?b=qq&nk=' . $qq . '&s=40';
+        } else {
+            //读取镜像地址
+            $options = Options::alloc();
+            $Mailer = $options->plugin('Mailer');
+            $avatarurl = $Mailer->avatar;
+            //判断url是否以/结尾
+            if (substr($avatarurl, -1) != '/') {
+                $avatarurl = $avatarurl . '/';
+            }
+            $avatar = $avatarurl . md5($mail) . '?s=40&d=identicon';
+        }
+        return $avatar;
     }
 }
