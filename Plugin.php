@@ -25,7 +25,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
  *
  *@package Mailer
  *@author 呆小萌
- *@version 1.1.1
+ *@version 2.0
  *@link https://www.zhaoyingtian.com/archives/mailer.html
  */
 
