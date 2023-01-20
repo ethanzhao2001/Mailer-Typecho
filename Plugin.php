@@ -94,7 +94,7 @@ class Plugin implements PluginInterface
             array('default' => _t('默认'), 'color' => _t('多彩'), 'chat' => _t('聊天'), 'custom' => _t('自定义')),
             'default',
             _t('模板选择'),
-            _t('自定义模板请在 Mailer/Theme/custom 添加模板文件')
+            _t('Chat Template Designed By blog.keepke.com<br>自定义模板请在 Mailer/Theme/custom 添加模板文件')
         );
         $form->addInput($template->multiMode());
     }
